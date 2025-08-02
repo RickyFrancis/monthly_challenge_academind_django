@@ -34,13 +34,16 @@ def index(request):
 
 def monthly_challenge(request, month):
     challenge_text = None   
-    try:
-        challenge_text = monthly_challenges[month]
-        response_data = f"<h1>{challenge_text}</h1>"
-        return HttpResponse(response_data)
-    except:
-        response_data = "<h1 style='color: red;'>This month is not supported!</h1>"
-        return HttpResponseNotFound(response_data)
+    # try:
+    challenge_text = monthly_challenges[month]
+    response_data = render_to_string("challenges/challenge.html", {
+        "month_name": month,
+        "text": challenge_text
+    })
+    return HttpResponse(response_data)
+    # except:
+    #     response_data = "<h1 style='color: red;'>This month is not supported!</h1>"
+    #     return HttpResponseNotFound(response_data)
     
 
 
